@@ -6,16 +6,17 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { defineProps} from 'vue';
-const props = defineProps(['startup']);
+const props = defineProps(['name']);
 const form = useForm({
-    name: props.startup.name ?? '',
-    sector: props.startup.sector ?? '',
-    ceo: props.startup.ceo ?? '',
-    address: props.startup.address ?? '',
-    email: props.startup.email ?? '',
-    phone: props.startup.phone ?? '',
-    products: props.startup.products ?? ''
+    id: '',
+    sector: '',
+    ceo: '',
+    address: '',
+    email: '',
+    phone: '',
+    products: ''
 });
+
 </script>
 
 <template>
@@ -25,7 +26,7 @@ const form = useForm({
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Edit {{startup.name}}
+                Create a new Start-Up listing
             </h2>
         </template>
 
@@ -89,7 +90,7 @@ const form = useForm({
                               
                                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }"
                                     :disabled="form.processing">
-                                    UPDATE
+                                    Create new startup
                                 </PrimaryButton>
                             </div>
                         </form>

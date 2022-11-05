@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Donation;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class DonationController extends Controller
 {
@@ -24,7 +25,7 @@ class DonationController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Donation/Create');
     }
 
     /**

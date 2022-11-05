@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
-            $table->foreign('startup_id')->references('id')->on('startups');
+            $table->foreignId('startup_id')->references('id')->on('startups');
             $table->decimal('amount',20,4);
             $table->timestamps();
         });

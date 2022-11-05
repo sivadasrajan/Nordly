@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Startup;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class StartupController extends Controller
 {
@@ -14,7 +15,9 @@ class StartupController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Startup/Index',[
+            'startups' => Startup::paginate(10)
+        ]);
     }
 
     /**
@@ -24,7 +27,7 @@ class StartupController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Startup/Create');
     }
 
     /**
@@ -46,7 +49,7 @@ class StartupController extends Controller
      */
     public function show(Startup $startup)
     {
-        //
+        return Inertia::render('Startup/Show',['startup' => $startup]);
     }
 
     /**
@@ -57,7 +60,7 @@ class StartupController extends Controller
      */
     public function edit(Startup $startup)
     {
-        //
+        return Inertia::render('Startup/Edit',['startup' => $startup]);
     }
 
     /**

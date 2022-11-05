@@ -32,3 +32,23 @@ Route::get('/dashboard', function () {
 Route::resource('startups',StartupController::class);
 Route::resource('donations',DonationController::class);
 require __DIR__.'/auth.php';
+
+
+
+Route::group(['namespace' => 'App\Http\Controllers'], function()
+{   
+
+    /**
+    * startup Routes
+    */
+    // Route::resource('startups', StartupController::class);
+    // Route::group(['prefix' => 'startups'], function() {
+    //         Route::get('/', 'StartupController@index')->name('startups.index');
+    //         Route::get('/create', 'StartupController@create')->name('startups.create');
+    //         Route::post('/create', 'StartupController@store')->name('startups.store');
+    //         Route::get('/{startup}/show', 'StartupController@show')->name('startups.show');
+    //         Route::get('/{startup}/edit', 'StartupController@edit')->name('startups.edit');
+    //         Route::patch('/{startup}/update', 'StartupController@update')->name('startups.update');
+    //         Route::delete('/{startup}/delete', 'StartupController@destroy')->name('startups.destroy');
+    // });
+});

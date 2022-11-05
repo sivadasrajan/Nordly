@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+use App\Models\Startup;
 use App\Models\Donation;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+use App\Http\Requests\DonationCreateRequest;
 
 class DonationController extends Controller
 {
@@ -23,9 +25,9 @@ class DonationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function donateGet(Startup $id)
     {
-        return Inertia::render('Donation/Create');
+        return Inertia::render('Donation/Donate',['startup' => $id]);
     }
 
     /**
@@ -39,6 +41,11 @@ class DonationController extends Controller
         //
     }
 
+    public function donate(DonationCreateRequest $request)
+    {
+        Donation::create(array_merge($request->validated()));
+        return   Inertia::location(route('startups.show',$request->validated()['startup_id']));
+    }
     /**
      * Display the specified resource.
      *

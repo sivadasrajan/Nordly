@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Startup extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'sector',
+        'ceo',
+        'address',
+        'email',
+        'phone',
+        'products'
+    ];
+
+    public function donations()
+    {
+        return $this->hasMany(Donation::class);
+    }
 }

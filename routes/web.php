@@ -31,6 +31,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::resource('startups',StartupController::class);
 Route::resource('donations',DonationController::class);
+Route::get('donations/donate/{id}',[DonationController::class,'donateGet'])->name('donate');
+Route::post('donations/donate',[DonationController::class,'donate'])->name('donate.save');
 require __DIR__.'/auth.php';
 
 

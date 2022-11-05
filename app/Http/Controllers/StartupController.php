@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Startup;
+use App\Models\Donation;
+use Illuminate\Http\Request;
+use App\Http\Requests\StoreStartupRequest;
+use App\Http\Requests\UpdateStartupRequest;
 
 class StartupController extends Controller
 {
@@ -18,24 +22,25 @@ class StartupController extends Controller
     {
         return Inertia::render('Startup/Create');
     }
-    public function store(Startup $startup, StoreStartupRequest $request)
+    public function store(StoreStartupRequest $request)
     {
-        $startup->create(array_merge($request->validated(), [
-            'password' => 'test' 
-        ]));
+        Startup::create(array_merge($request->validated()));
+        return Inertia::location(route('startups.index'));
     }
     public function show(Startup $startup) 
     {
-        return Inertia::render('Startup/Show',['startup' => $startup]);
+        return Inertia::render('Startup/Show',['startup' => $startup , 'donations' => Donation::where('startup_id', $startup->id)->paginate(10)]);
     }
 
     public function edit(Startup $startup) 
     {
         return Inertia::render('Startup/Edit',['startup' => $startup]);
     }
-    public function update(Startup $startup, UpdateStartupRequest $request) 
+    public function update(UpdateStartupRequest $request) 
     {
-        $startup->update($request->validated());
+        $validated = $request->validated();
+        // dd($validated);
+        Startup::findOrFail($validated['id'])->update($validated);
 
         return redirect()->route('startups.index')
             ->withSuccess(__('startup updated successfully.'));

@@ -17,4 +17,9 @@ class Startup extends Model
         'phone',
         'products'
     ];
+
+    public function donations()
+    {
+        return $this->hasMany(Donation::class);
+    }
 }

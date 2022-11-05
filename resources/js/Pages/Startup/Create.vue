@@ -17,6 +17,12 @@ const form = useForm({
     products: ''
 });
 
+const submit = () => {
+    form.post(route('startups.store'), {
+       // onFinish: () => form.reset('password'),
+    });
+};
+
 </script>
 
 <template>

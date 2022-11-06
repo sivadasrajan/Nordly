@@ -9,14 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+     * @return voixd
      */
     public function up()
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
             $table->foreignId('startup_id')->references('id')->on('startups');
-            $table->decimal('amount',20,4);
+            $table->foreignId('project_id')->references('id')->on('projects')->nullable();
+            $table->decimal('amount',20,2);
             $table->timestamps();
         });
     }

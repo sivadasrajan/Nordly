@@ -19,6 +19,13 @@ class StartupController extends Controller
             'startups' => Startup::paginate(10)
         ]);
     }
+
+    public function search(Request $request)
+    {
+        return Inertia::render('Welcome',[
+            'startups' => Startup::where('name','like','%'.($request['search']).'%')->paginate(10)
+        ]);
+    }
     public function create()
     {
         return Inertia::render('Startup/Create',['categories' => Category::all()]);

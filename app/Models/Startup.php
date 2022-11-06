@@ -22,4 +22,8 @@ class Startup extends Model
     {
         return $this->hasMany(Donation::class);
     }
+    public function name()
+    {
+        return $this->name;
+    }
 }

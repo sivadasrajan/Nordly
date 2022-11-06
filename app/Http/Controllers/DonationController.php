@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Startup;
 use App\Models\Donation;
+use Tzsk\Payu\Facades\Payu;
 use Illuminate\Http\Request;
+use Tzsk\Payu\Concerns\Customer;
+use Tzsk\Payu\Concerns\Transaction;
 use App\Http\Requests\DonationCreateRequest;
 
 class DonationController extends Controller
@@ -27,7 +30,7 @@ class DonationController extends Controller
      */
     public function donateGet(Startup $id)
     {
-        return Inertia::render('Donation/Donate',['startup' => $id]);
+        return Inertia::render('Donation/Donate',['startup' => $id , 'csrf_token' => csrf_token()]);
     }
 
     /**
@@ -43,8 +46,21 @@ class DonationController extends Controller
 
     public function donate(DonationCreateRequest $request)
     {
-        Donation::create(array_merge($request->validated()));
-        return   Inertia::location(route('startups.show',$request->validated()['startup_id']));
+        $validated = $request->validated();
+        $startup = Startup::findOrFail($validated['startup_id']);
+        
+        $customer = Customer::make()->firstname('name')->email($validated['email']) 
+        ->phone($validated['mobile']);
+
+
+        $transaction = Transaction::make()
+        ->charge(100)
+        ->for($startup->name())// Only when using any custom attributes
+        ->to($customer);
+    
+    return Payu::initiate($transaction)->redirect(route('status'));
+        // Donation::create(array_merge($validated));
+        // return   Inertia::location(route('startups.show',$request->validated()['startup_id']));
     }
     /**
      * Display the specified resource.
@@ -55,6 +71,11 @@ class DonationController extends Controller
     public function show(Donation $donation)
     {
         //
+    }
+
+    public function status(Request $req)
+    {
+        $transaction = Payu::capture();
     }
 
     /**

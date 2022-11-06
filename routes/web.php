@@ -33,6 +33,7 @@ Route::resource('startups',StartupController::class);
 Route::resource('donations',DonationController::class);
 Route::get('donations/donate/{id}',[DonationController::class,'donateGet'])->name('donate');
 Route::post('donations/donate',[DonationController::class,'donate'])->name('donate.save');
+Route::post('donations/status',[DonationController::class,'status'])->name('status');
 require __DIR__.'/auth.php';
 
 

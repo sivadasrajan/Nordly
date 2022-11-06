@@ -5,19 +5,17 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { defineProps } from 'vue';
-const props = defineProps(['startup']);
-
+import Hidden from '@/Components/Hidden.vue';
+import { defineProps,ref } from 'vue';
+const props = defineProps(['startup','csrf_token']);
+// const tok = ref($page.props.csrf_token);
 const form = useForm({
     startup_id: props.startup.id,
+    name: '',
+    email: '',
+    mobile: '',
     amount: 0,
 });
-
-const submit = () => {
-    form.post(route('donate.save',props.startup.id), {
-       // onFinish: () => form.reset('password'),
-    });
-};
 
 </script>
 
@@ -39,12 +37,32 @@ const submit = () => {
                         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
                             {{ status }}
                         </div>
-
-                        <form @submit.prevent="submit">
+                        <form :action="route('donate.save')" method="post">
+                           <Hidden type="hidden" name="startup_id" :value="startup.id"/>
+                           <Hidden type="hidden" name="_token" :value="csrf_token"/>
+                            <div>
+                                <InputLabel for="name" value="Name" />
+                                <TextInput id="name"  name="name" type="text" class="mt-1 block w-full" v-model="form.name"  autofocus required autocomplete="name" />
+                                <InputError class="mt-2" :message="form.errors.name" />
+                            </div>
+                            <div>
+                                <InputLabel for="email" value="Email" />
+                                <TextInput id="email" name="email" type="email" class="mt-1 block w-full" v-model="form.email"
+                                    required autofocus autocomplete="email" />
+                                <InputError class="mt-2" :message="form.errors.email" />
+                            </div>
+                           
+                            <div>
+                                <InputLabel for="mobile" value="Phone number
+                                " />
+                                <TextInput id="mobile" name="mobile" type="number" class="mt-1 block w-full" v-model="form.mobile"
+                                    required autofocus autocomplete="mobile" />
+                                <InputError class="mt-2" :message="form.errors.mobile" />
+                            </div>
                            
                             <div>
                                 <InputLabel for="amount" value="Amount to donate" />
-                                <TextInput id="amount" type="number" class="mt-1 block w-full" v-model="form.amount"
+                                <TextInput id="amount" name="amount" type="number" class="mt-1 block w-full" v-model="form.amount"
                                     required autofocus autocomplete="amount" />
                                 <InputError class="mt-2" :message="form.errors.amount" />
                             </div>

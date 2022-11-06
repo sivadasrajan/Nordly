@@ -24,6 +24,9 @@ class DonationCreateRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|string|max:50',
+            'email' => 'required|email',
+            'mobile' => 'required|digits:10',
             'startup_id' => 'required|exists:startups,id',
             'amount' => 'required|numeric'
         ];

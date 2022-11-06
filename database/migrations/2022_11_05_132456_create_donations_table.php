@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->email('email');
+            $table->string('mobile');
             $table->foreignId('startup_id')->references('id')->on('startups');
             $table->foreignId('project_id')->references('id')->on('projects')->nullable();
             $table->decimal('amount',20,2);

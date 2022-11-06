@@ -35,16 +35,16 @@
 > The best part, it's straightforward to set it up!here however we wish to show you some our application feature.
 
 
-- better business performance and efficiency
-- flexibility and scalability
-- easy to handle
+- Better business performance and efficiency
+- Flexibility and scalability
+- Easy to handle
 **Read more about the ##NAME## app on [the project homepage]
 
 # 👨‍💻 Tech stack
 
 Here's a brief  overview of the tech stack ##NAME## app uses:
 
-- This project uses the  hottest open-source technologies such as Laravel(PHP framework)and vue js a progressive javascript framework.
+- This project use open-source technologies such as Laravel(PHP framework)and vue js a progressive javascript framework.
 
 
 # ✍️ Contributing

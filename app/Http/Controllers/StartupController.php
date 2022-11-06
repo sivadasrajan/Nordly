@@ -12,7 +12,11 @@ use App\Http\Requests\UpdateStartupRequest;
 
 class StartupController extends Controller
 {
-    //
+    /**
+     * Display a listing of the startup.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return Inertia::render('Startup/Index',[
@@ -30,20 +34,46 @@ class StartupController extends Controller
     {
         return Inertia::render('Startup/Create',['categories' => Category::all()]);
     }
+     /**
+     * Store a newly created startup in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
     public function store(StoreStartupRequest $request)
     {
         Startup::create(array_merge($request->validated()));
         return Inertia::location(route('startups.index'));
     }
+    /**
+     * Display the specified startup.
+     *
+     * @param  \App\Models\Startup  $startup
+     * @return \Illuminate\Http\Response
+     */
     public function show(Startup $startup) 
     {
         return Inertia::render('Startup/Show',['startup' => $startup , 'donations' => Donation::where('startup_id', $startup->id)->paginate(10)]);
     }
+    /**
+     * Show the form for editing the specified startup.
+     *
+     * @param  \App\Models\Startup  $startup
+     * @return \Illuminate\Http\Response
+     */
 
     public function edit(Startup $startup) 
     {
         return Inertia::render('Startup/Edit',['startup' => $startup]);
     }
+    /**
+     * Update the specified storage in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Startup $startup
+     * @return \Illuminate\Http\Response
+     */
     public function update(UpdateStartupRequest $request) 
     {
         $validated = $request->validated();
@@ -53,6 +83,12 @@ class StartupController extends Controller
         return redirect()->route('startups.index')
             ->withSuccess(__('startup updated successfully.'));
     }
+     /**
+     * Remove the specified startup from storage.
+     *
+     * @param  \App\Models\Startup $startup
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Startup $startup) 
     {
         $startup->delete();

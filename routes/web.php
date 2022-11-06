@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\DonationController;
-use App\Http\Controllers\StartupController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\StartupController;
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\ApplicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::resource('applications',ApplicationController::class);
 Route::resource('startups',StartupController::class);
 Route::resource('donations',DonationController::class);
 Route::get('donations/donate/{id}',[DonationController::class,'donateGet'])->name('donate');

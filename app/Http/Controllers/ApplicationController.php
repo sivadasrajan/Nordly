@@ -2,84 +2,52 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Application;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreApplicationRequest;
+// use App\Http\Controllers\ApplicationController;
 
 class ApplicationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  
     public function index()
     {
-        //
+        return Inertia::render('Application/Index',[
+            'applications' => Application::paginate(10)
+        ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return Inertia::render('Application/Create');
+    }
+    public function store(StoreApplicationRequest $request)
+    {
+        Application::create(array_merge($request->validated()));
+        return Inertia::location(route('applications.index'));
+    }
+    public function show(Application $application) 
+    {
+        return Inertia::render('Application/Show',['application' => $application] );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function edit(Application $application) 
     {
-        //
+        return Inertia::render('Application/Edit',['application' => $application]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Application  $application
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Application $application)
+    public function update(UpdateApplicationRequest $request) 
     {
-        //
+        $validated = $request->validated();
+        Application::findOrFail($validated['id'])->update($validated);
+
+        return redirect()->route('applications.index')
+            ->withSuccess(__('applications updated successfully.'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Application  $application
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Application $application)
+    public function destroy(Application $application) 
     {
-        //
-    }
+        $application->delete();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Application  $application
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Application $application)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Application  $application
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Application $application)
-    {
-        //
+        return redirect()->route('applications.index')
+            ->withSuccess(__('appplication  deleted successfully.'));
     }
 }

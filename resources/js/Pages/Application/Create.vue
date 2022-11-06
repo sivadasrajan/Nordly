@@ -9,12 +9,12 @@ import TextInput from '@/Components/TextInput.vue';
 
 const form = useForm({
     name: '',
-    sector: '',
+    // sector: '',
     ceo: '',
     address: '',
     email: '',
     phone: '',
-    products: ''
+    // products: ''
 });
 
 const submit = () => {
@@ -32,7 +32,7 @@ const submit = () => {
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create a new Start-Up listing
+                Create a new Application listing
             </h2>
         </template>
 
@@ -96,7 +96,7 @@ const submit = () => {
                               
                                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }"
                                     :disabled="form.processing">
-                                    Create new startup
+                                    Create new application
                                 </PrimaryButton>
                             </div>
                         </form>

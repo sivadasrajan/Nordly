@@ -5,20 +5,21 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-
-
+import { defineProps} from 'vue';
+const props = defineProps(['application']);
 const form = useForm({
-    name: '',
-    sector: '',
-    ceo: '',
-    address: '',
-    email: '',
-    phone: '',
-    products: ''
+    id: props.application.id ,
+    name: props.application.name ?? '',
+    sector: props.application.sector ?? '',
+    ceo: props.application.ceo ?? '',
+    address: props.application.address ?? '',
+    email: props.application.email ?? '',
+    phone: props.application.phone ?? '',
+    products: props.application.products ?? ''
 });
 
 const submit = () => {
-    form.post(route('applications.store'), {
+    form.patch(route('applications.update',props.application.id), {
        // onFinish: () => form.reset('password'),
     });
 };
@@ -32,7 +33,7 @@ const submit = () => {
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create a new Start-Up listing
+                Edit {{application.name}}
             </h2>
         </template>
 
@@ -45,8 +46,9 @@ const submit = () => {
                         </div>
 
                         <form @submit.prevent="submit">
+                            
                             <div>
-                                <InputLabel for="name" value="Name of startup" />
+                                <InputLabel for="name" value="Name of application" />
                                 <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name"
                                     required autofocus autocomplete="name" />
                                 <InputError class="mt-2" :message="form.errors.name" />
@@ -54,7 +56,7 @@ const submit = () => {
                             <div>
                                 <InputLabel for="ceo" value="Name of cheif executive" />
                                 <TextInput id="ceo" type="text" class="mt-1 block w-full" v-model="form.ceo"
-                                    required autofocus autocomplete="ceo" />
+                                     autofocus autocomplete="ceo" />
                                 <InputError class="mt-2" :message="form.errors.ceo" />
                             </div>
                             <div>
@@ -96,7 +98,7 @@ const submit = () => {
                               
                                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }"
                                     :disabled="form.processing">
-                                    Create new startup
+                                    UPDATE
                                 </PrimaryButton>
                             </div>
                         </form>

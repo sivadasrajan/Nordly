@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ApplicationController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the application.
      *
      * @return \Illuminate\Http\Response
      */
@@ -18,7 +18,7 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new application.
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,7 +28,7 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created application in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -39,7 +39,7 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified aplication.
      *
      * @param  \App\Models\Application  $application
      * @return \Illuminate\Http\Response
@@ -50,7 +50,7 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified application.
      *
      * @param  \App\Models\Application  $application
      * @return \Illuminate\Http\Response
@@ -61,7 +61,7 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified application in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Application  $application
@@ -73,7 +73,7 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified application from storage.
      *
      * @param  \App\Models\Application  $application
      * @return \Illuminate\Http\Response

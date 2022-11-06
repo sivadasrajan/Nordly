@@ -14,7 +14,7 @@ use App\Http\Requests\DonationCreateRequest;
 class DonationController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the donations.
      *
      * @return \Illuminate\Http\Response
      */
@@ -24,7 +24,7 @@ class DonationController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new donations.
      *
      * @return \Illuminate\Http\Response
      */
@@ -34,7 +34,7 @@ class DonationController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created donations in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -63,7 +63,7 @@ class DonationController extends Controller
         // return   Inertia::location(route('startups.show',$request->validated()['startup_id']));
     }
     /**
-     * Display the specified resource.
+     * Display the specified donations.
      *
      * @param  \App\Models\Donation  $donation
      * @return \Illuminate\Http\Response
@@ -79,7 +79,7 @@ class DonationController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified donations.
      *
      * @param  \App\Models\Donation  $donation
      * @return \Illuminate\Http\Response
@@ -90,7 +90,7 @@ class DonationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified donations in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Donation  $donation
@@ -102,7 +102,7 @@ class DonationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified donations from storage.
      *
      * @param  \App\Models\Donation  $donation
      * @return \Illuminate\Http\Response

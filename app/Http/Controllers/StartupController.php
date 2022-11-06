@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Startup;
+use App\Models\Category;
 use App\Models\Donation;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreStartupRequest;
@@ -22,14 +23,16 @@ class StartupController extends Controller
             'startups' => Startup::paginate(10)
         ]);
     }
-    /**
-     * Show the form for creating a new startup.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function search(Request $request)
+    {
+        return Inertia::render('Welcome',[
+            'startups' => Startup::where('name','like','%'.($request['search']).'%')->paginate(10)
+        ]);
+    }
     public function create()
     {
-        return Inertia::render('Startup/Create');
+        return Inertia::render('Startup/Create',['categories' => Category::all()]);
     }
      /**
      * Store a newly created startup in storage.

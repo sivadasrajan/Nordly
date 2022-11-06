@@ -5,7 +5,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-const props = defineProps(['categories']);
+
 
 const form = useForm({
     name: '',
@@ -15,11 +15,11 @@ const form = useForm({
     address: '',
     email: '',
     phone: '',
-    products: ''
+    // products: ''
 });
 
 const submit = () => {
-    form.post(route('startups.store'), {
+    form.post(route('applications.store'), {
        // onFinish: () => form.reset('password'),
     });
 };
@@ -33,7 +33,7 @@ const submit = () => {
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create a new Start-Up listing
+                Create a new Application listing
             </h2>
         </template>
 
@@ -57,16 +57,6 @@ const submit = () => {
                                 <TextInput id="ceo" type="text" class="mt-1 block w-full" v-model="form.ceo"
                                     required autofocus autocomplete="ceo" />
                                 <InputError class="mt-2" :message="form.errors.ceo" />
-                            </div>
-                            <div>
-                                <InputLabel for="category_id" value="Category" />
-                                <Select id="category_id" type="text" class="mt-1 block w-full" v-model="form.category_id"
-                                    required autofocus autocomplete="category" >
-                                    <option value="">Choose an option</option>
-                                    <option v-for="category in categories" :value="category.id">{{category.name}}</option>
-                                </Select>
-
-                                <InputError class="mt-2" :message="form.errors.category_id" />
                             </div>
                             <div>
                                 <InputLabel for="city" value="City" />
@@ -107,7 +97,7 @@ const submit = () => {
                               
                                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }"
                                     :disabled="form.processing">
-                                    Create new startup
+                                    Create new application
                                 </PrimaryButton>
                             </div>
                         </form>

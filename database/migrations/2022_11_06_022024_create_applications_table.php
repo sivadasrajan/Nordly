@@ -17,10 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('ceo');
+            $table->string('city');
+            $table->foreignId('category_id')->references('id')->on('startups');
             $table->string('address');
             $table->string('email');
             $table->string('phone');
             $table->json('products')->nullable();
+            $table->enum('status',['pending','approved','rejected'])->default('pending');
 
             $table->timestamps();
         });

@@ -55,7 +55,7 @@ class DonationController extends Controller
 
         $transaction = Transaction::make()
         ->charge(100)
-        ->for($startup->name())// Only when using any custom attributes
+        ->for($startup->name)// Only when using any custom attributes
         ->to($customer);
     
     return Payu::initiate($transaction)->redirect(route('status'));

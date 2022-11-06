@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\DonationController;
-use App\Http\Controllers\StartupController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Startup;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Request;
+use App\Http\Controllers\StartupController;
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\ApplicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,40 +21,26 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return (Inertia::render('Welcome', [
+        'startups' => Startup::filter(Request::only('search'))->paginate(10)
+    ]));
 });
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::resource('applications',ApplicationController::class);
 Route::resource('startups',StartupController::class);
+Route::post('applications/{id}/approve',[ApplicationController::class,'approve'])->name('applications.approve');
+Route::post('applications/{id}/reject',[ApplicationController::class,'reject'])->name('applications.reject');
 Route::resource('donations',DonationController::class);
 Route::get('donations/donate/{id}',[DonationController::class,'donateGet'])->name('donate');
 Route::post('donations/donate',[DonationController::class,'donate'])->name('donate.save');
 Route::post('donations/status',[DonationController::class,'status'])->name('status');
+Route::get('startups/search',[StartupController::class,'searchGet'])->name('startups.search.get');
+Route::post('startups/search',[StartupController::class,'search'])->name('startups.search');
+
+
 require __DIR__.'/auth.php';
 
 
-
-Route::group(['namespace' => 'App\Http\Controllers'], function()
-{   
-
-    /**
-    * startup Routes
-    */
-    // Route::resource('startups', StartupController::class);
-    // Route::group(['prefix' => 'startups'], function() {
-    //         Route::get('/', 'StartupController@index')->name('startups.index');
-    //         Route::get('/create', 'StartupController@create')->name('startups.create');
-    //         Route::post('/create', 'StartupController@store')->name('startups.store');
-    //         Route::get('/{startup}/show', 'StartupController@show')->name('startups.show');
-    //         Route::get('/{startup}/edit', 'StartupController@edit')->name('startups.edit');
-    //         Route::patch('/{startup}/update', 'StartupController@update')->name('startups.update');
-    //         Route::delete('/{startup}/delete', 'StartupController@destroy')->name('startups.destroy');
-    // });
-});

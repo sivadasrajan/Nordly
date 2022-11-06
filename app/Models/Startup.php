@@ -10,7 +10,8 @@ class Startup extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'sector',
+        'city',
+        'category_id',
         'ceo',
         'address',
         'email',
@@ -22,8 +23,11 @@ class Startup extends Model
     {
         return $this->hasMany(Donation::class);
     }
-    public function name()
+
+    public function scopeFilter($query, array $filters)
     {
-        return $this->name;
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where('name', 'like', '%'.$search.'%');
+        });
     }
 }

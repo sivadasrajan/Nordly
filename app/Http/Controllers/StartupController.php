@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Startup;
+use App\Models\Category;
 use App\Models\Donation;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreStartupRequest;
@@ -20,7 +21,7 @@ class StartupController extends Controller
     }
     public function create()
     {
-        return Inertia::render('Startup/Create');
+        return Inertia::render('Startup/Create',['categories' => Category::all()]);
     }
     public function store(StoreStartupRequest $request)
     {

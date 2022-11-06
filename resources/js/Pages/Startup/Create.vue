@@ -5,12 +5,13 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-
+const props = defineProps(['categories']);
 
 const form = useForm({
     name: '',
-    sector: '',
+    city: '',
     ceo: '',
+    category_id: '1',
     address: '',
     email: '',
     phone: '',
@@ -18,7 +19,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('applications.store'), {
+    form.post(route('startups.store'), {
        // onFinish: () => form.reset('password'),
     });
 };
@@ -58,10 +59,20 @@ const submit = () => {
                                 <InputError class="mt-2" :message="form.errors.ceo" />
                             </div>
                             <div>
-                                <InputLabel for="sector" value="Sector of operation" />
-                                <TextInput id="sector" type="text" class="mt-1 block w-full" v-model="form.sector"
-                                    required autofocus autocomplete="sector" />
-                                <InputError class="mt-2" :message="form.errors.sector" />
+                                <InputLabel for="category_id" value="Category" />
+                                <Select id="category_id" type="text" class="mt-1 block w-full" v-model="form.category_id"
+                                    required autofocus autocomplete="category" >
+                                    <option value="">Choose an option</option>
+                                    <option v-for="category in categories" :value="category.id">{{category.name}}</option>
+                                </Select>
+
+                                <InputError class="mt-2" :message="form.errors.category_id" />
+                            </div>
+                            <div>
+                                <InputLabel for="city" value="City" />
+                                <TextInput id="city" type="text" class="mt-1 block w-full" v-model="form.city"
+                                    required autofocus autocomplete="city" />
+                                <InputError class="mt-2" :message="form.errors.city" />
                             </div>
                             <div>
                                 <InputLabel for="address" value="Address for communication" />

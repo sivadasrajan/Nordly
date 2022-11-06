@@ -10,7 +10,8 @@ const props = defineProps(['application']);
 const form = useForm({
     id: props.application.id ,
     name: props.application.name ?? '',
-    sector: props.application.sector ?? '',
+    city: props.application.city ?? '',
+    category: props.startup.category_id,
     ceo: props.application.ceo ?? '',
     address: props.application.address ?? '',
     email: props.application.email ?? '',
@@ -60,10 +61,10 @@ const submit = () => {
                                 <InputError class="mt-2" :message="form.errors.ceo" />
                             </div>
                             <div>
-                                <InputLabel for="sector" value="Sector of operation" />
-                                <TextInput id="sector" type="text" class="mt-1 block w-full" v-model="form.sector"
-                                    required autofocus autocomplete="sector" />
-                                <InputError class="mt-2" :message="form.errors.sector" />
+                                <InputLabel for="city" value="City" />
+                                <TextInput id="city" type="text" class="mt-1 block w-full" v-model="form.city"
+                                    required autofocus autocomplete="city" />
+                                <InputError class="mt-2" :message="form.errors.city" />
                             </div>
                             <div>
                                 <InputLabel for="address" value="Address for communication" />

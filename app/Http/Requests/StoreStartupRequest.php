@@ -25,12 +25,13 @@ class StoreStartupRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:100',
-            'sector' => 'required|string|max:100',
+            'city' => 'required|string|max:100',
             'ceo' => 'required|string|max:100',
+            'category_id' => 'required|exists:categories,id',
             'address' => 'required|string|max:100',
             'email' => 'required|email|max:100',
             'phone' => 'required|string|max:100',
-            'products' => 'required|string|max:100',
+            // 'products' => 'required|string|max:100',
         ];
     }
 }

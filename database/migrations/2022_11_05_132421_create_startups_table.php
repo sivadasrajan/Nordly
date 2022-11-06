@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('ceo');
+            $table->foreignId('category_id')->references('id')->on('startups');
             $table->string('address');
             $table->string('email');
             $table->string('phone');

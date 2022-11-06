@@ -10,7 +10,8 @@ class Application extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'sector',
+        'city',
+        'category_id',
         'ceo',
         'address',
         'email',

@@ -1,14 +1,20 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import { Head, useForm } from '@inertiajs/inertia-vue3';
 
 import { Inertia } from '@inertiajs/inertia'
 import { defineProps } from 'vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 // import route from 'ziggy';
 const props = defineProps(['application']);
+const form = useForm({});
+const approve = () => {
+    form.post(route('applications.approve',props.application.id));
+}
 
-
+const reject = () => {
+    form.post(route('applications.reject',props.application.id));
+}
 
 </script>
 
@@ -34,8 +40,12 @@ const props = defineProps(['application']);
                         <div class="capitalize">phone : <span class="font-bold">{{ props.application.phone ??'Not available' }} </span></div>
                         <div class="capitalize">product : <span class="font-bold">{{ props.application.product ??'Not available' }} </span> </div>
                     </div>
-
+                    
         
+                </div>
+                <div v-if="props.application.status == 'pending'" class="bg-white shadow rounded p-3 mt-3">
+                    <PrimaryButton class="ml-4" @click="approve"> Approve</PrimaryButton>
+                    <PrimaryButton class="ml-4 br-red-400" @click="reject"> Reject</PrimaryButton>
                 </div>
                 
             </div>

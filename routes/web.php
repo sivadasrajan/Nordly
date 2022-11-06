@@ -32,6 +32,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::resource('applications',ApplicationController::class);
 Route::resource('startups',StartupController::class);
+Route::post('applications/{id}/approve',[ApplicationController::class,'approve'])->name('applications.approve');
+Route::post('applications/{id}/reject',[ApplicationController::class,'reject'])->name('applications.reject');
 Route::resource('donations',DonationController::class);
 Route::get('donations/donate/{id}',[DonationController::class,'donateGet'])->name('donate');
 Route::post('donations/donate',[DonationController::class,'donate'])->name('donate.save');

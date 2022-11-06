@@ -6,12 +6,12 @@ import { Inertia } from '@inertiajs/inertia'
 import { defineProps } from 'vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 // import route from 'ziggy';
-const props = defineProps(['startup']);
+const props = defineProps(['startup','donations']);
 
 
 function donate() {
     // console.log(route('donations.create'));
-    Inertia.visit(route('donations.create'))
+    Inertia.visit(route('donate',props.startup.id))
 }
 
 </script>
@@ -42,6 +42,40 @@ function donate() {
                     <PrimaryButton class="ml-4" @click="donate()">
                                     Donate
                                 </PrimaryButton>
+                </div>
+                <div class="text-xl">Donations </div>
+                <div class="mt-4 bg-white rounded-md shadow overflow-x-auto">
+                    <table class="w-full whitespace-nowrap">
+                        <thead>
+                            <tr class="text-left font-bold">
+                                <th class="pb-4 pt-6 px-6">Name</th>
+                                <th class="pb-4 pt-6 px-6">Amount</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="donation in donations.data" :key="startup.id"
+                                class="hover:bg-gray-100 focus-within:bg-gray-100">
+                                <td class="border-t">
+                                    <Link class="flex items-center px-6 py-4 focus:text-indigo-500"
+                                        :href="`/startups/${startup.id}/edit`">
+                                    {{ donation.name ?? 'Anonymous user' }}
+                                    </Link>
+                                </td>
+                                <td class="border-t">
+                                    <Link class="flex items-center px-6 py-4"
+                                        :href="`/startups/${startup.id}/edit`" tabindex="-1">
+                                    {{ donation.amount }}
+                                    </Link>
+                                </td>
+                                
+                            </tr>
+                            <tr v-if="donations.data.length === 0">
+                                <td class="px-6 py-4 border-t flex justify-center w-full " colspan="4">No donations.</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

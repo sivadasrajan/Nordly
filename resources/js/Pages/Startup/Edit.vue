@@ -8,6 +8,7 @@ import TextInput from '@/Components/TextInput.vue';
 import { defineProps} from 'vue';
 const props = defineProps(['startup']);
 const form = useForm({
+    id: props.startup.id ,
     name: props.startup.name ?? '',
     sector: props.startup.sector ?? '',
     ceo: props.startup.ceo ?? '',
@@ -16,6 +17,13 @@ const form = useForm({
     phone: props.startup.phone ?? '',
     products: props.startup.products ?? ''
 });
+
+const submit = () => {
+    form.patch(route('startups.update',props.startup.id), {
+       // onFinish: () => form.reset('password'),
+    });
+};
+
 </script>
 
 <template>
@@ -38,6 +46,7 @@ const form = useForm({
                         </div>
 
                         <form @submit.prevent="submit">
+                            
                             <div>
                                 <InputLabel for="name" value="Name of startup" />
                                 <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name"
@@ -47,7 +56,7 @@ const form = useForm({
                             <div>
                                 <InputLabel for="ceo" value="Name of cheif executive" />
                                 <TextInput id="ceo" type="text" class="mt-1 block w-full" v-model="form.ceo"
-                                    required autofocus autocomplete="ceo" />
+                                     autofocus autocomplete="ceo" />
                                 <InputError class="mt-2" :message="form.errors.ceo" />
                             </div>
                             <div>

@@ -19,7 +19,7 @@ return [
         'biz' => new PayuBiz([
             'mode' => env('PAYU_BIZ_MODE', Gateway::TEST_MODE),
             'key' => env('PAYU_BIZ_KEY', 'gtKFFx'),
-            'salt' => env('PAYU_BIZ_SALT', 'eCwWELxi'),
+            'salt' => env('PAYU_BIZ_SALT', '4R38IvwiV57FwVpsgOvTXBdLE4tHUXFW'),
         ]),
     ],
 

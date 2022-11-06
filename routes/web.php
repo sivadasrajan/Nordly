@@ -36,8 +36,11 @@ Route::post('applications/{id}/reject',[ApplicationController::class,'reject'])-
 Route::resource('donations',DonationController::class);
 Route::get('donations/donate/{id}',[DonationController::class,'donateGet'])->name('donate');
 Route::post('donations/donate',[DonationController::class,'donate'])->name('donate.save');
+Route::post('donations/status',[DonationController::class,'status'])->name('status');
 Route::get('startups/search',[StartupController::class,'searchGet'])->name('startups.search.get');
 Route::post('startups/search',[StartupController::class,'search'])->name('startups.search');
+
+
 require __DIR__.'/auth.php';
 
 

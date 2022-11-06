@@ -1,4 +1,5 @@
-## Nordles A Directory for startups
+# Nordles
+A Directory for startups
 
 
 </a>
@@ -14,7 +15,7 @@
 </div>
 
 
-### Nordles Directory for startups is available NOW..! 🥳 🚀
+### Nordles is available NOW..! 🥳 🚀
 
 
 <br />
@@ -25,9 +26,11 @@
 
 <br />
 
+Nordles is a web app to list all information about startups and helps its users to make financial contributions to the startups they like. It tries to improve discoverability of startups and it's services/products by making it available at one place and enabling search by categor, products,and services. Also it functions as a platform to financially contribute to Startups either in big or small amounts. 
+
 # 🧐 Project philosophy
 
-> The Nordles web application is build upon the idea startup ,actually it functions like directory forstartup .This list all startups currently running .  Well the  app is more than that ; it encourages you to enhance the startup by funding .You can easily contribute to a startup through Nordles.It makes the whole procedures of funding hasslefree.
+> The Nordles web application is build upon the idea startup. It functions as a directory for startups .This list all startups currently running .  Well the  app is more than that ; it encourages you to enhance the startup by funding .You can easily contribute to a startup through Nordles.It makes the whole procedures of funding hasslefree.
 > Nordles can help you cut down your time, cost, and effort to find a startup.which means without creating a user account for doners.
 > The best part, it’s straightforward to set it up!here however we wish to show you some our application feature.
 
